@@ -64,3 +64,32 @@ middleware across the Express.js framework and its ecosystem.
  different pieces of functionality in an Express.js application.
 
  ----------------------------------------------------------------------------------------
+
+ Steps to use http 
+ 1) make form first 
+ 2) add httpclientmodule in imports array and top of app.module
+ 3) import it in services , make an instance using constructor.
+ 4) make requests eg:- return this.http.delete(`http://127.0.0.1:3000/delete/${File}`);
+ 5) subscribe where you make this call
+ eg:- this.crud.listFiles().subscribe({
+  next: (res)=> {
+    console.log(res);
+  },
+  error: (err)=>
+  {
+    console.log(err);
+  },
+});
+
+-------------------------------------------------------------------------------------------------------
+
+steps to use template driven form
+1) add forms module in imports array of app.module and also add import statement
+2)remove action and method attribute from your html form tag 
+3)make input of type=button to input of type submit. Whenever its pressed 
+it will emit ngsubmit event.
+4) listen that event on form tag
+so bind ng submit event on it
+
+
+

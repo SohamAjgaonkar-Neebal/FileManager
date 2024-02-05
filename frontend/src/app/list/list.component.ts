@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CRUD } from '../Services/CRUD.service';
 @Component({
   selector: 'app-list',
@@ -8,7 +8,7 @@ import { CRUD } from '../Services/CRUD.service';
   //new instance of CRUD . We will inherite the same instance from parent. If we add provider 
   // array here we will override the instnace obtained from parent 
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
 
   constructor(private crud:CRUD) // using private keyword we create a property in ListComponent 
   //class and it will be assigned an instance of CRUD class. By this we ask angular to create
@@ -18,21 +18,48 @@ export class ListComponent {
 
   }
 
+  ngOnInit(): void {
+    this.listFiles();
+  }
 
   listFiles()
   {
-    this.crud.listFiles();
+    this.crud.listFiles().subscribe({
+      next: (res)=> {
+        console.log(res);
+      },
+      error: (err)=>
+      {
+        console.log(err);
+      },
+    });
   }
 
-  downloadFile()
+  downloadFile(File:String)
   {
-    this.crud.downloadFile()
+    this.crud.downloadFile(File).subscribe({
+      next: (res)=> {
+        console.log(res);
+      },
+      error: (err)=>
+      {
+        console.log(err);
+      },
+    });
     
   }
 
-  deleteFile()
+  deleteFile(File:String)
   {
-    this.crud.deleteFile();
+    this.crud.deleteFile(File).subscribe({
+      next: (res)=> {
+        console.log(res);
+      },
+      error: (err)=>
+      {
+        console.log(err);
+      },
+    });
   }
 
 }
