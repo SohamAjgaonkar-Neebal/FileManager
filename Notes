@@ -1,0 +1,66 @@
+in form add enctype=multipart/form data
+multer is not a package . its a middleware
+
+for serving files statically watch
+:-https://www.udemy.com/course/nodejs-the-complete-guide/learn/lecture/12036704#overview
+
+watch lec 329 331 for setting headers while downloading files
+
+lecc 334 for deleting using files
+
+----------------------------------------------------------------------------------------
+**** so no matter if a function is made with no arguments, 
+if we are using it as a middleware, we have to pass req, res
+ and next as arguments while calling that function with no arguments?
+Is it some rule in node js?
+
+==> ChatGPT
+In Node.js and Express.js, middleware functions typically have a specific signature,
+ regardless of how the middleware function itself is defined. 
+ The signature for Express.js middleware functions is (req, res, next).
+
+When you use middleware in an Express.js application, 
+the framework expects these three parameters to be present in 
+the middleware function. This is a convention established by 
+Express.js for handling the request-response cycle.
+
+Here's the common middleware function signature:
+
+javascript
+
+function middlewareFunction(req, res, next) {
+  // Middleware logic here
+}
+The parameters req (request), res (response), 
+and next (callback function to pass control to the next middleware) 
+are essential for the middleware to interact with the request and 
+response objects and to manage the flow of the application.
+
+When you use a third-party middleware like Multer, you follow the same 
+convention. Even if the Multer middleware itself is configured without 
+explicitly taking parameters, when you use it in a route handler, you call 
+it with (req, res, next):
+
+javascript Code
+
+const upload = multer({
+  storage: FileStorage,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10 MB (adjust as needed)
+  },
+}).single('File');
+
+const uploadHandler = (req, res, next) => {
+  upload(req, res, (err) => {
+    // Middleware logic here
+  });
+};
+
+router.post('/upload', uploadHandler);
+This convention ensures consistency in handling 
+middleware across the Express.js framework and its ecosystem.
+ It also allows middleware to seamlessly integrate into the 
+ request-response flow, making it easier to compose and manage 
+ different pieces of functionality in an Express.js application.
+
+ ----------------------------------------------------------------------------------------

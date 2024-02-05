@@ -1,0 +1,42 @@
+.list{
+    background-color: rgb(241, 192, 232);
+    padding: 10px 20px;
+    margin: 5px 5px;
+    border-radius: 5px;
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+    
+}
+#delete{
+   background-color: rgb(255, 162, 168);
+   padding: 5px 10px;
+   margin: 0px 10px;
+   border-radius: 5px;
+   border:none;
+}
+#delete:hover{
+    background-color: rgb(255, 197, 201);
+}
+
+#download{
+    background-color: rgb(144, 219, 244);
+    padding: 5px 10px;
+    margin: 0px 10px;
+    border-radius: 5px;
+    border:none;
+ }
+ #download:hover{
+     background-color: rgb(142, 236, 245);
+ }
+
+.list h4
+{
+    display: flex;
+  align-items: center;
+}
+
+.buttons{
+    display: flex;
+    justify-content: end;
+}
