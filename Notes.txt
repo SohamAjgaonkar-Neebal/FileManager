@@ -93,3 +93,20 @@ so bind ng submit event on it
 
 
 
+
+
+
+-------------------------------------------------------------------------------------
+One Way Data Binding
+{{data}}  String Interpolation =>Component to View Template
+we can use ternary operation,expressions, functions which return some value in {{}}
+
+[Property]="data"  Property binding  =>Component to View Template
+for:- disabled , hidden, checked string interpolation will not work .hence property binding
+bind-property ... another syntax for property binding
+[att.attribute_name]=""  syntax for attributr binding
+
+
+(data)="expression" Event Binding  =>View template to Component
+
+[ngModel] 2 way data binding

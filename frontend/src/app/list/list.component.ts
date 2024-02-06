@@ -18,6 +18,8 @@ export class ListComponent implements OnInit {
 
   }
 
+   docs:any="";
+
   ngOnInit(): void {
     this.listFiles();
   }
@@ -27,6 +29,7 @@ export class ListComponent implements OnInit {
     this.crud.listFiles().subscribe({
       next: (res)=> {
         console.log(res);
+        this.docs=res.files;
       },
       error: (err)=>
       {
