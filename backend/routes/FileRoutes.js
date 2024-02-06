@@ -27,7 +27,7 @@ const FileStorage = multer.diskStorage({
 router.post('/upload',multer({
     storage:FileStorage,
     limits: {
-        fileSize: 50 * 1024 * 1024, // 10 MB 
+        fileSize: 50 * 1024 * 1024, // 50 MB 
       },
     }).single('File'),FileController.upload);
 

@@ -38,11 +38,25 @@ export class ListComponent implements OnInit {
     });
   }
 
-  downloadFile(File:String)
+  downloadFile(File:string)
   {
     this.crud.downloadFile(File).subscribe({
-      next: (res)=> {
-        console.log(res);
+      next: (res : ArrayBuffer)=> {
+        //       // The file has been received as a blob
+        const blob = new Blob([res], { type: 'application/octet-stream' });
+
+        // Create a link element to trigger the download
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = File;
+        document.body.appendChild(link);
+
+        // Trigger the click event to start the download
+        link.click();
+
+        // Remove the link element
+        document.body.removeChild(link);
+        //console.log(res);
       },
       error: (err)=>
       {
@@ -51,6 +65,7 @@ export class ListComponent implements OnInit {
     });
     
   }
+
 
   deleteFile(File:String)
   {

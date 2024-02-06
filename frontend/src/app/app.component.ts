@@ -12,8 +12,26 @@ export class AppComponent {
 
   }
 
-  uploadFile()
+  uploadFile(event:any)
   {
-    this.crud.uploadFile();
+    //const File=event.currentTarget.files[0];
+    const File = event.target.files[0];
+    const formObj=new FormData();
+    formObj.append('File',File);
+    this.crud.uploadFile(formObj).subscribe({
+      next: (res)=> {
+        console.log(res);
+      },
+      error: (err)=>
+      {
+        console.log(err);
+      },
+    });
   }
 }
+
+
+
+
+
+

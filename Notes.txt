@@ -110,3 +110,8 @@ bind-property ... another syntax for property binding
 (data)="expression" Event Binding  =>View template to Component
 
 [ngModel] 2 way data binding
+
+------------------------------------------------------------------------------
+// app.use(express.static('Documents'));
+// app.use(bodyparser.urlencoded({extended:false}));
+// app.use(bodyparser.json({type:'application/json'}));

@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-// @Injectable({
-//     // Already in providers array in app module. still getting error if decoarator not used. Why!
-//     providedIn: 'root',
-//   })
+@Injectable({
+    
+    providedIn: 'root',
+  })
 export class CRUD{
 
     constructor(private http: HttpClient){}
@@ -21,12 +21,13 @@ export class CRUD{
 
     downloadFile(File:String)
     {
-        return this.http.get(`http://127.0.0.1:3000/download/${File}`);
+        return this.http.get(`http://127.0.0.1:3000/download/${File}`,{
+        responseType:'arraybuffer',});
     }
 
-    uploadFile(File:File)
+    uploadFile(File:FormData)
     {
         return this.http.post(
-            `http://127.0.0.1:3000/upload/`,{File});
+            `http://localhost:3000/upload`,{File},{ responseType: 'text' });
     }
 }
