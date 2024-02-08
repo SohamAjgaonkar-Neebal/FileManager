@@ -108,10 +108,78 @@ bind-property ... another syntax for property binding
 
 
 (data)="expression" Event Binding  =>View template to Component
+(data)="function($event)"
 
-[ngModel] 2 way data binding
+[(ngModel)] 2 way data binding :- Combination for property binding and event binding
+[(ngModel)]="property"  eg:- use to change value property in input tag. replace value with ngmodule
+X:- WRONG:- add ngModel in imports and imports array in app.module files from @angular/forms
+V:- Correct:- add formsmodule in imports and imports array in app.module files from @angular/forms
+
 
 ------------------------------------------------------------------------------
 // app.use(express.static('Documents'));
 // app.use(bodyparser.urlencoded({extended:false}));
 // app.use(bodyparser.json({type:'application/json'}));
+---------------------------------------------------------------------------------
+Directives:- Instructions to DOM are Directives
+3 types:- 1)Component:- the components we make
+          2)Attribute directive:- changes the property for dom elements
+            (ngStyle,ngClass)
+          3)Structural directive:- adds or removes dom elements
+            (Use * before structural directive:-*ngIf,*ngFor,*ngSwitch)
+We typically add directive with attribute selector
+But technically selector of a directive can be configured like the
+selector of a componet . Different types of selectors are
+CSS class selector, Attribute Selector , HTML tag selector
+SO when we use selector of a component we use it like HTML tag
+But in case of directive we use the selector of a directive like a
+HTML attribute but technically we can use the selector of directive like a CSS class
+or like HTML tag or like an ID selector
+
+use @directive decorator with js object with metadata selector:
+directives are also ts classes
+
+while using ngFor you can put ; let i = index to get indices of items iterared
+
+-------------------------------------------------------------------------------
+# use ? after property to make it optional
+
+@input  :- import from angular/core
+* In child component you can add @Input decorator to a property
+and now that property can be used as an attribute on the selector
+of this component
+* Now in parent component where we use selector of child component 
+in template we can use that property from child as attribute
+[property]="value from parent" (Custome Property Binding)
+* This way data will flow from parent to child .
+
+@Output :- import from angular/core
+* from child component to parent component
+add decorator on a property of child
+# search for event emmiter for making custome events
+lec 27
+Use custome event binding 
+
+
+-----------------------------------------------------------------
+#@Input properties, are not initialised by the time 
+constructor is called
+#Also projected content is not available and child component
+not constructed by the time  constructor is called
+
+When component is removed from dom we can say its destroyed
+
+LifeCycleHooks:-
+ngOnChange,ngOnInit,ngDoCheck,ngAfterContentInit,
+ngAfterContentChecked,ngAfterViewInit,ngAfterViewChecked,
+ngDestroy
+
+its a good practice to import and impliment LifeCycleHooks
+before using
+
+1)ngOnChange:- works with @input:- i.e runs after 
+@input property value CHANGES (For same value dosnt run). also can take smallchanges arguments
+small changes has properties like previous value, current value, 1st change , etc 
+2) ngOnInit:- runs after ngOnChnge only after 1st chnage detection cycle
+
+

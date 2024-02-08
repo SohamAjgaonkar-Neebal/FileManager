@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit,SimpleChanges} from '@angular/core';
 import { CRUD } from '../Services/CRUD.service';
 @Component({
   selector: 'app-list',
@@ -8,7 +8,7 @@ import { CRUD } from '../Services/CRUD.service';
   //new instance of CRUD . We will inherite the same instance from parent. If we add provider 
   // array here we will override the instnace obtained from parent 
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit{//, OnChanges{
 
   constructor(private crud:CRUD) // using private keyword we create a property in ListComponent 
   //class and it will be assigned an instance of CRUD class. By this we ask angular to create
@@ -17,12 +17,21 @@ export class ListComponent implements OnInit {
   {
 
   }
-
-   docs:any="";
+    @Input()
+   docs:any=""; 
+  //  ngOnChanges(changes: SimpleChanges): void {
+  //   if (changes['docs'])  {
+  //     // Handle the updated document list
+  //     console.log("I am in ngOnChnages list.ts");
+  //    // this.listFiles();
+  //   }
+  // }
 
   ngOnInit(): void {
     this.listFiles();
+    console.log("I am in ngOnInit() list.ts");
   }
+  
 
   listFiles()
   {
@@ -30,6 +39,7 @@ export class ListComponent implements OnInit {
       next: (res)=> {
         console.log(res);
         this.docs=res.files;
+        console.log("I am in listFiles()() list.ts");
       },
       error: (err)=>
       {
@@ -60,7 +70,7 @@ export class ListComponent implements OnInit {
       },
       error: (err)=>
       {
-        console.log(err);
+        console.log("ERROR DOWNLOADING FILE:---"+err);
       },
     });
     
@@ -72,6 +82,7 @@ export class ListComponent implements OnInit {
     this.crud.deleteFile(File).subscribe({
       next: (res)=> {
         console.log(res);
+        this.listFiles();
       },
       error: (err)=>
       {

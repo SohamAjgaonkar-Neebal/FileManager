@@ -12,6 +12,7 @@ export class AppComponent {
 
   }
 
+  docs:any="";
   uploadFile(event:any)
   {
     //const File=event.currentTarget.files[0];
@@ -20,10 +21,25 @@ export class AppComponent {
     formObj.append('File',File);
     this.crud.uploadFile(formObj).subscribe({
       next: (res)=> {
+        
         console.log(res);
+        this.updateList();
       },
       error: (err)=>
       {
+        console.log(err);
+      },
+    });
+  }
+  updateList()
+  {
+    this.crud.listFiles().subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.docs=res.files;
+        console.log("I am in updateList app.ts");
+      },
+      error:(err)=>{
         console.log(err);
       },
     });

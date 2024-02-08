@@ -28,6 +28,12 @@ export class CRUD{
     uploadFile(File:FormData)
     {
         return this.http.post(
-            `http://localhost:3000/upload`,{File},{ responseType: 'text' });
+            `http://localhost:3000/upload`,File);
     }
+    // uploadFile(file: File): Observable<any> {
+    //     const formObj = new FormData();
+    //     formObj.append('File', file);
+      
+    //     return this.http.post('http://localhost:3000/upload', formObj, { responseType: 'text' });
+    //   }
 }
