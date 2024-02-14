@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CRUD } from './Services/CRUD.service';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,10 +22,22 @@ export class AppComponent {
     const formObj=new FormData();
     formObj.append('File',File);
     this.crud.uploadFile(formObj).subscribe({
-      next: (res)=> {
+      // next: (res)=> {
         
-        console.log(res);
-        this.updateList();
+      //   console.log(res);
+      //   this.updateList();
+      // },
+      next: (event: HttpEvent<Object>) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          // handle upload progress
+          const percentDone = Math.round((100 * event.loaded) / event.total||1) ;
+          console.log(`File is ${percentDone}% uploaded.`);
+        } else if (event.type === HttpEventType.Response) {
+          // handle the response after the file is uploaded
+          //console.log(event.body);
+             console.log(event);
+             this.updateList();
+        }
       },
       error: (err)=>
       {

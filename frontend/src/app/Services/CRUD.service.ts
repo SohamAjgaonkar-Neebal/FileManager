@@ -27,8 +27,15 @@ export class CRUD{
 
     uploadFile(File:FormData)
     {
+        const headers = new HttpHeaders();
+        headers.append('Content-Type', 'multipart/form-data');
         return this.http.post(
-            `http://localhost:3000/upload`,File);
+            `http://localhost:3000/upload`,File,
+            {
+                headers,
+                reportProgress: true, // enable progress tracking
+                observe: 'events', // receive events to track progress
+            });
     }
     // uploadFile(file: File): Observable<any> {
     //     const formObj = new FormData();
